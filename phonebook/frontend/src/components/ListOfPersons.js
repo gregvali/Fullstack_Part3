@@ -1,10 +1,12 @@
+
+import React from 'react'
 import ListItem from './ListItem'
 
-const ListOfPersons = ({persons, filter, deletePerson}) => {
+const ListOfPersons = ({persons, filtered, deletePerson}) => {
     return(
       persons
         .filter(person => 
-          person.name.toLowerCase().includes(filter.toLowerCase())
+          person.name.toLowerCase().includes(filtered.toLowerCase())
         )
         .map(person => 
           <ListItem 

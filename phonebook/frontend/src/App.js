@@ -115,7 +115,7 @@ const App = () => {
       <h3>Numbers</h3>
       <ListOfPersons 
         persons = {persons} 
-        filter = {filter}
+        filtered = {filter}
         deletePerson = {deletePerson}
       />
     </div>
