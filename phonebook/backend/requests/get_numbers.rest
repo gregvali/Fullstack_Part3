@@ -1,4 +1,4 @@
-GET http://localhost:3001/api/phonebook
+GET http://localhost:3001/api/phonebook/
 ###
 POST http://localhost:3001/api/phonebook HTTP/1.1
 content-type: application/json
@@ -6,4 +6,12 @@ content-type: application/json
 {
     "name": "ad lovelace",
     "number": "32424"
+}
+
+###
+PUT http://localhost:3001/api/phonebook/64e50ea660dbac9dd49353a2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "dad ajkgjg"
 }
