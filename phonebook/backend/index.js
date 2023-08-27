@@ -10,21 +10,20 @@ app.use(express.static('build'))
 morgan.token('object', function (req, res) { return JSON.stringify(req.body)})
 app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :object`));
 
-let numbers = [
-]
-
 app.get('/', (request, response) => {
   response.send('<h1>Welcome to the phonebook!</h1>')
 })
 
 app.get('/info', (request, response) => {
   requestTime = new Date();
-  response.send(`
-    <div>
-    Phonebook has info for ${numbers.length} people <br/>
-    ${requestTime}
-    </div>
-  `)
+  Person.countDocuments({}).then(persons => {
+    response.send(`
+      <div>
+      Phonebook has info for ${persons.length} people <br/>
+      ${requestTime}
+      </div>
+    `)
+  })
 })
   
 app.get('/api/phonebook', (request, response) => {
@@ -76,14 +75,14 @@ app.post('/api/phonebook', (request, response) => {
 app.put('/api/phonebook/:id', (request, response, next) => {
   const body = request.body
 
-  const note = {
-    content: body.content,
-    important: body.important,
+  const person = {
+    name: body.name,
+    number: body.number,
   }
 
-  Person.findByIdAndUpdate(request.params.id, note, { new: true })
-    .then(updatedNote => {
-      response.json(updatedNote)
+  Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    .then(updatedPerson => {
+      response.json(updatedPerson)
     })
     .catch(error => next(error))
 })
